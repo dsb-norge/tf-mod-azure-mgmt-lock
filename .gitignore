@@ -27,3 +27,13 @@ override.tf.json
 
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
+
+# Local tflint directories
+**/.tflint/*
+
+# Local tflint configuration
+# We use the one we get from https://raw.githubusercontent.com/dsb-norge/terraform-tflint-wrappers/main/tflint_linux.sh
+**/.tflint.hcl
+
+# Terraform lock files
+**/.terraform.lock.hcl

@@ -16,11 +16,11 @@ variable "protected_resources" {
 variable "app_name" {
   description = "Name of application/domain using resources"
   type        = string
-  default     = "<unknown>"
+  nullable    = false
 }
 
 variable "created_by" {
   description = "the tf project managing the lock(s)"
   type        = string
-  default     = "<unknown>"
+  nullable    = false
 }
