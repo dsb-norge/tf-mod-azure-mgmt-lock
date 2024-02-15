@@ -11,11 +11,12 @@ variable "created_by" {
 }
 
 variable "protected_resources" {
-  description = "map of scope (URN/ID) and name for resources that should have a CanNotDelete lock"
+  description = "map of scope (URN/ID) and name for resources that should be locked lock."
   type = map(object({
     id : string,
     name : string,
     lock_level : optional(string),
+    description : optional(string),
   }))
   validation {
     condition = alltrue([
