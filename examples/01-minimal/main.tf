@@ -9,7 +9,7 @@ resource "azurerm_resource_group" "this" {
 }
 
 module "prevent_resource_group_from_deletion" {
-  source = "../../"
+  source = "../../" # root of repo
 
   protected_resources = {
     lock_1 = {
