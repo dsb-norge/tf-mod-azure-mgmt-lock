@@ -1,11 +1,12 @@
+# tflint-ignore-file: azurerm_resource_tag
+
 provider "azurerm" {
   features {}
 }
 
-# tflint-ignore: azurerm_resource_tag
 resource "azurerm_resource_group" "this" {
   location = var.location
-  name     = "example-resources"
+  name     = var.resource_group_name
 }
 
 module "prevent_resource_group_from_deletion" {
