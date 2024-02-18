@@ -1,4 +1,5 @@
 # inputs for tests
+location   = "norwayeast"
 app_name   = "my-app-name"
 created_by = "https://github.com/my-org/my-tf-project"
 protected_resources = {

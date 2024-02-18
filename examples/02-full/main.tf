@@ -6,7 +6,7 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "this" {
   location = var.location
-  name     = "example-resources"
+  name     = var.resource_group_name
 }
 
 resource "azurerm_dns_zone" "this" {
@@ -22,7 +22,7 @@ resource "azurerm_dns_a_record" "this" {
   records             = ["10.0.180.17"]
 }
 
-module "prevent_resource_group_from_deletion" {
+module "lock_multiple_resources" {
   source = "../../" # root of repo
 
   protected_resources = {
