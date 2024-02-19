@@ -33,7 +33,6 @@ module "resource_deletion_locks" {
 }
 ```
 
-
 ## Versioning
 
 This module uses [semantic versioning](https://semver.org).
@@ -53,14 +52,20 @@ This module uses [semantic versioning](https://semver.org).
   lint
 ```
 
-
 ### Generate and inject terraform-docs in README.md
 
 ```shell
 # go1.17+
-go install github.com/terraform-docs/terraform-docs@v0.16.0
+go install github.com/terraform-docs/terraform-docs@v0.17.0
 export PATH=$PATH:$(go env GOPATH)/bin
+
+# root
 terraform-docs markdown table --output-file README.md .
+
+# docs for examples
+for ex_dir in $(find "./examples" -maxdepth 1 -mindepth 1 -type d | sort); do
+  terraform-docs markdown document "${ex_dir}" --config ./examples/.terraform-docs.yml
+done
 ```
 
 ### Release
@@ -70,6 +75,7 @@ After merge of PR to main use tags to release.
 Use semantic versioning, see [semver.org](https://semver.org/). Always push tags and add tag annotations.
 
 Example of patch release `v0.0.4`:
+
 ```bash
 git checkout origin/main
 git pull origin main
@@ -80,6 +86,7 @@ git push -f --tags   # force push the new tags
 ```
 
 Example of major release `v1.0.0`:
+
 ```bash
 git checkout origin/main
 git pull origin main
@@ -91,7 +98,7 @@ git push --tags      # push the new tags
 
 **Note:** If you are having problems pulling main after a release, try to force fetch the tags: `git fetch --tags -f`.
 
-# terraform-docs
+## terraform-docs
 
 
 <!-- BEGIN_TF_DOCS -->
@@ -99,14 +106,14 @@ git push --tags      # push the new tags
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 3.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.7.0, < 2.0.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.0.0, < 4.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.31.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.91.0 |
 
 ## Modules
 
@@ -123,12 +130,12 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_app_name"></a> [app\_name](#input\_app\_name) | Name of application/domain using resources | `string` | n/a | yes |
-| <a name="input_created_by"></a> [created\_by](#input\_created\_by) | the tf project managing the lock(s) | `string` | n/a | yes |
-| <a name="input_protected_resources"></a> [protected\_resources](#input\_protected\_resources) | map of scope (URN/ID) and name for resources that should have a CanNotDelete lock | <pre>map(object({<br>    id : string,<br>    name : string,<br>    lock_level : optional(string),<br>  }))</pre> | n/a | yes |
+| <a name="input_created_by"></a> [created\_by](#input\_created\_by) | The terraform project managing the lock(s) | `string` | n/a | yes |
+| <a name="input_protected_resources"></a> [protected\_resources](#input\_protected\_resources) | Map with configuration of what resources to lock and how. | <pre>map(object({<br>    id : string,<br>    name : string,<br>    lock_level : optional(string),<br>    description : optional(string),<br>  }))</pre> | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_management_locks"></a> [management\_locks](#output\_management\_locks) | the management locks created by this module |
+| <a name="output_management_lock_ids"></a> [management\_lock\_ids](#output\_management\_lock\_ids) | ids of the the management locks created by this module |
 <!-- END_TF_DOCS -->
