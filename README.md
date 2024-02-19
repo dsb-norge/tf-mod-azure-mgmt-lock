@@ -58,7 +58,14 @@ This module uses [semantic versioning](https://semver.org).
 # go1.17+
 go install github.com/terraform-docs/terraform-docs@v0.18.0
 export PATH=$PATH:$(go env GOPATH)/bin
+
+# root
 terraform-docs markdown table --output-file README.md .
+
+# docs for examples
+for ex_dir in $(find "./examples" -maxdepth 1 -mindepth 1 -type d | sort); do
+  terraform-docs markdown document "${ex_dir}" --config ./examples/.terraform-docs.yml
+done
 ```
 
 ### Release
@@ -123,8 +130,8 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_app_name"></a> [app\_name](#input\_app\_name) | Name of application/domain using resources | `string` | n/a | yes |
-| <a name="input_created_by"></a> [created\_by](#input\_created\_by) | the tf project managing the lock(s) | `string` | n/a | yes |
-| <a name="input_protected_resources"></a> [protected\_resources](#input\_protected\_resources) | map of scope (URN/ID) and name for resources that should have a CanNotDelete lock | <pre>map(object({<br>    id : string,<br>    name : string,<br>    lock_level : optional(string),<br>  }))</pre> | n/a | yes |
+| <a name="input_created_by"></a> [created\_by](#input\_created\_by) | The terraform project managing the lock(s) | `string` | n/a | yes |
+| <a name="input_protected_resources"></a> [protected\_resources](#input\_protected\_resources) | Map with configuration of what resources to lock and how. | <pre>map(object({<br>    id : string,<br>    name : string,<br>    lock_level : optional(string),<br>    description : optional(string),<br>  }))</pre> | n/a | yes |
 
 ## Outputs
 

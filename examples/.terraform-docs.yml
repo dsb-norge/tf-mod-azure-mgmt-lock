@@ -1,0 +1,30 @@
+# for generating docs for all example dirs
+#
+# usage:
+#   for ex_dir in $(find "./examples" -maxdepth 1 -type d -regextype posix-egrep -regex "^\./examples/[0-9]{2}.*" -printf '%f\n'); do
+#     terraform-docs markdown document "./examples/${ex_dir}" --config ./examples/.terraform-docs.yml
+#   done
+
+formatter: "" # this is required
+
+content: |-
+  ## main.tf
+
+  ```hcl
+  {{ include "main.tf" }}
+  ```
+
+  ## variables.tf
+
+  ```hcl
+  {{ include "variables.tf" }}
+  ```
+
+  ## outputs.tf
+
+  ```hcl
+  {{ include "outputs.tf" }}
+  ```
+
+output:
+  file: "README.md"
