@@ -8,12 +8,12 @@ Terraform module for adding [management locks](https://registry.terraform.io/pro
 
 `name` - name of the lock. Must be unique scope-wide, will be prefixed by `lock-`.
 
-
 ## optional arguments
 
 `lock_level` - [lock level](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_lock#lock_level), defaults to `CanNotDelete`.
 
 ## Example
+
 ```hcl
 provider "azurerm" {
   features {}
@@ -32,7 +32,6 @@ module "resource_deletion_locks" {
   created_by = "https://github.com/my-org/my-tf-project"
 }
 ```
-
 
 ## Versioning
 
@@ -53,12 +52,11 @@ This module uses [semantic versioning](https://semver.org).
   lint
 ```
 
-
 ### Generate and inject terraform-docs in README.md
 
 ```shell
 # go1.17+
-go install github.com/terraform-docs/terraform-docs@v0.16.0
+go install github.com/terraform-docs/terraform-docs@v0.18.0
 export PATH=$PATH:$(go env GOPATH)/bin
 terraform-docs markdown table --output-file README.md .
 ```
@@ -70,6 +68,7 @@ After merge of PR to main use tags to release.
 Use semantic versioning, see [semver.org](https://semver.org/). Always push tags and add tag annotations.
 
 Example of patch release `v0.0.4`:
+
 ```bash
 git checkout origin/main
 git pull origin main
@@ -80,6 +79,7 @@ git push -f --tags   # force push the new tags
 ```
 
 Example of major release `v1.0.0`:
+
 ```bash
 git checkout origin/main
 git pull origin main
@@ -91,7 +91,7 @@ git push --tags      # push the new tags
 
 **Note:** If you are having problems pulling main after a release, try to force fetch the tags: `git fetch --tags -f`.
 
-# terraform-docs
+## terraform-docs
 
 
 <!-- BEGIN_TF_DOCS -->
@@ -100,13 +100,13 @@ git push --tags      # push the new tags
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.0.0, < 5.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.31.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.0.1 |
 
 ## Modules
 
@@ -130,5 +130,5 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_management_locks"></a> [management\_locks](#output\_management\_locks) | the management locks created by this module |
+| <a name="output_management_lock_ids"></a> [management\_lock\_ids](#output\_management\_lock\_ids) | ids of the the management locks created by this module |
 <!-- END_TF_DOCS -->
