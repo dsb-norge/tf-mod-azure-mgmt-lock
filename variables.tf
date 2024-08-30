@@ -1,3 +1,15 @@
+variable "app_name" {
+  description = "Name of application/domain using resources"
+  type        = string
+  nullable    = false
+}
+
+variable "created_by" {
+  description = "the tf project managing the lock(s)"
+  type        = string
+  nullable    = false
+}
+
 variable "protected_resources" {
   description = "map of scope (URN/ID) and name for resources that should have a CanNotDelete lock"
   type = map(object({
@@ -11,16 +23,4 @@ variable "protected_resources" {
     ])
     error_message = "lock_level, if not omitted, may only be one of [ReadOnly, CanNotDelete]"
   }
-}
-
-variable "app_name" {
-  description = "Name of application/domain using resources"
-  type        = string
-  nullable    = false
-}
-
-variable "created_by" {
-  description = "the tf project managing the lock(s)"
-  type        = string
-  nullable    = false
 }
