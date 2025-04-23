@@ -1,4 +1,8 @@
+#
 # tf-mod-azure-mgmt-lock
+
+> [!IMPORTANT]  
+**This module is deprecated and unmaintained. Please move to [published version of module](https://registry.terraform.io/modules/dsb-norge/mgmt-resource-lock/)**
 
 Terraform module for adding [management locks](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_lock) to resources.
 
